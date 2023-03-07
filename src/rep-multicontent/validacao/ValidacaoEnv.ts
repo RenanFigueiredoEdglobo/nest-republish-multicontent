@@ -14,8 +14,7 @@ export class EnvValidador implements ValidatorConstraintInterface {
         env: any,
         validationArguments?: ValidationArguments,
     ): Promise<boolean> {
-        if(env == "QA")return true
-        else if(env=="PROD")return true
+        if(env == "QA" || env == "PROD")return true
         else return false
     }
 }

@@ -1,5 +1,6 @@
 import { IsEmail, IsNotEmpty, IsString,IsOptional } from "class-validator";
 import { EhQAouPROD } from "../validacao/ValidacaoEnv";
+import { ValidarTenant } from "../validacao/ValidacaoTenant";
 
 export class RepMulticontentModel {
     @EhQAouPROD({message: "O campo env deve ser PROD ou QA"})
@@ -7,7 +8,12 @@ export class RepMulticontentModel {
     @IsNotEmpty({ message: 'Campo env nãa pode ser vazio, o valor ser   QA ou PROD' })
     env: string
     
-    @IsString({message:"o cmpo email deve ser uma string"})
+    @ValidarTenant({message: "o tenant não existe"})
+    @IsString({message: "campo tenant deve ser string "})
+    @IsNotEmpty({ message: 'Campo tenant nãa pode ser vazio,'})
+    tenant: string
+    
+    @IsString({message:"o campo email deve ser uma string"})
     @IsOptional()
     @IsEmail(
         {},

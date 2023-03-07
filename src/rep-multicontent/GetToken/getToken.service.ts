@@ -5,16 +5,16 @@ import { RepMulticontentModel } from '../model/rep-multicontent.model';
 import { IgetToken } from './interface/IgetToken';
 @Injectable()
 export class GetToken {
-    async getToken(env:RepMulticontentModel): Promise<IgetToken> {
-        const envAmb = Object.values(env)[0]
+    async getToken(env:string): Promise<IgetToken> {
+
         const requetTokent = await axios.request<IgetToken>({
             method: 'POST',
-            url: urlENVTOKEN[envAmb],
+            url: urlENVTOKEN[env],
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             data: new URLSearchParams({
                 grant_type: "client_credentials",
-                client_id: Client_credentials[envAmb].CLIENT_ID,
-                client_secret: Client_credentials[envAmb].CLIENT_SECRET
+                client_id: Client_credentials[env].CLIENT_ID,
+                client_secret: Client_credentials[env].CLIENT_SECRET
             })
         }).then((response) => ({
             status: response.status,
